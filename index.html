@@ -43,161 +43,227 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Chiranshu Bhatia - AI Engineer Manager Resume">
-    <meta name="keywords" content="AI Engineer, Machine Learning, GenAI, MLOps, Delhi, Resume">
+    <meta name="keywords" content="AI Engineer, Machine Learning, GenAI, Prompt Engineering, MLOps, Delhi, Resume">
     <title>Chiranshu Bhatia - AI Engineer Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
-            color: #333;
         }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .header {
+        .gradient-header {
+            background: linear-gradient(135deg, #0066CC, #4682B4);
+            color: white;
+            padding: 2rem;
             text-align: center;
-            padding: 20px;
+        }
+        .nav-sticky {
+            position: sticky;
+            top: 0;
             background-color: #0066CC;
-            color: #fff;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
+        .nav-sticky a {
+            color: white;
+            padding: 1rem;
+            transition: background-color 0.3s;
         }
-        .header p {
-            margin: 5px 0;
-            font-size: 1.1em;
+        .nav-sticky a:hover {
+            background-color: #0055AA;
         }
         .section {
-            padding: 20px;
-            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
         }
-        .section h2 {
-            color: #0066CC;
-            border-bottom: 2px solid #0066CC;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
         }
-        .section ul {
-            list-style-type: disc;
-            padding-left: 20px;
+        .project-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
         }
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .skills-grid div {
-            background-color: #f0f0f0;
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
+        .project-details {
+            display: none;
+        }
+        .project-card.active .project-details {
+            display: block;
         }
         .download-btn {
-            display: inline-block;
-            padding: 10px 20px;
             background-color: #0066CC;
-            color: #fff;
-            text-decoration: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
             border-radius: 5px;
-            margin-top: 10px;
+            transition: transform 0.3s, background-color 0.3s;
         }
         .download-btn:hover {
             background-color: #0055AA;
+            transform: scale(1.05);
         }
-        @media (max-width: 600px) {
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .skill-progress {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            height: 10px;
+            margin: 0.5rem 0;
+        }
+        .skill-progress div {
+            background-color: #0066CC;
+            height: 100%;
+            border-radius: 5px;
+            width: 90%;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Chiranshu Bhatia</h1>
-            <p>Machine Learning/AI Engineer Manager</p>
-            <p>+91 8446444869 | chirubhatia@live.com | Delhi, India</p>
-            <p>
-                <a href="https://github.com/chiranshubhatia" target="_blank" style="color: #fff;">GitHub</a> |
-                <a href="https://linkedin.com/in/chiranshubhatia" target="_blank" style="color: #fff;">LinkedIn</a> |
-                <a href="Chiranshu_Bhatia_Resume.pdf" download class="download-btn">Download Resume</a>
-            </p>
-        </div>
-        <div class="section">
-            <h2>Professional Story</h2>
+    <nav class="nav-sticky flex justify-center space-x-4 py-2">
+        <a href="#professional-story">Story</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#skills">Skills</a>
+        <a href="#languages">Languages</a>
+    </nav>
+    <div class="gradient-header">
+        <h1 class="text-4xl font-bold">Chiranshu Bhatia</h1>
+        <p class="text-lg">Machine Learning/AI Engineer Manager</p>
+        <p class="text-md mt-2">
+            <i class="fas fa-phone"></i> +91 8446444869 |
+            <i class="fas fa-envelope"></i> chirubhatia@live.com |
+            <i class="fas fa-map-marker-alt"></i> Delhi, India
+        </p>
+        <p class="mt-2">
+            <a href="https://github.com/chiranshubhatia" target="_blank" class="text-white hover:underline"><i class="fab fa-github"></i> GitHub</a> |
+            <a href="https://linkedin.com/in/chiranshubhatia" target="_blank" class="text-white hover:underline"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+            <a href="Chiranshu_Bhatia_Resume.pdf" download class="download-btn inline-block"><i class="fas fa-download"></i> Download Resume</a>
+        </p>
+    </div>
+    <div class="container max-w-4xl mx-auto p-6">
+        <div id="professional-story" class="section">
+            <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 mb-4">Professional Story</h2>
             <p>As a catalyst for innovation, I orchestrate teams to transform intricate data challenges into scalable AI solutions that drive millions in revenue and redefine operational efficiency. My leadership blends technical mastery with a vision for impact, guiding engineers to deliver systems with 95%+ accuracy while fostering collaboration across domains. By championing advanced AI and streamlined processes, I empower organizations to navigate dynamic tech landscapes with agility and precision, creating value that resonates with business goals and human aspirations.</p>
         </div>
-        <div class="section">
-            <h2>Key Projects at EXL Service</h2>
-            <p><strong>Audit Premium Insurance Workflow Automation</strong> (May 2021 – Present)</p>
-            <p>Led a team of 8 engineers to design and deploy an advanced AI system for payroll document digitization, streamlining the worker's compensation audit process.</p>
-            <ul>
-                <li>Conceptualized and implemented an end-to-end AI pipeline using advanced GenAI techniques and DevOps practices, deployed on AWS.</li>
-                <li>Developed information retrieval models to extract data from diverse documents, reducing manual audit processes by 80% and operational costs by 40%.</li>
-                <li>Created a streamlined audit workflow, boosting overall efficiency by 65% and driving $2M+ in annual revenue, with a projected YoY growth of 30-40%.</li>
-                <li>Mentored junior engineers to achieve 95%+ accuracy in table digitization models, enhancing audit reliability.</li>
-            </ul>
-            <p><strong>Castle High Value Property Insurance Surveys</strong> (Jan 2023 – Present)</p>
-            <p>Spearheaded a self-predictive AI solution for underinsured property identification, a first-of-its-kind in the real estate insurance sector.</p>
-            <ul>
-                <li>Managed end-to-end development using historical and geographical data, achieving $1M in revenue with a potential to exceed $2M annually.</li>
-                <li>Collaborated with cross-functional teams to deploy the solution on AWS, improving decision-making accuracy by 20%.</li>
-                <li>Guided a team of 6 engineers to ensure scalable deployment, maintaining 90%+ model performance.</li>
-            </ul>
-            <p><strong>Worker's Compensation Predictive Modeling</strong> (May 2021 – Present)</p>
-            <p>Directed the development of a predictive model for NCCI worker's compensation class codes, enhancing insurance premium calculations.</p>
-            <ul>
-                <li>Built a model with 90%+ accuracy in job role identification, reducing miscalculation risks by 15%.</li>
-                <li>Implemented CI/CD pipelines and Dockerized deployment on AWS, ensuring seamless updates and scalability.</li>
-                <li>Mentored team to optimize model performance, achieving a 10% improvement in inference speed.</li>
-            </ul>
+        <div id="projects" class="section">
+            <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 mb-4">Key Projects at EXL Service</h2>
+            <div class="project-card">
+                <h3 class="text-lg font-semibold"><i class="fas fa-project-diagram"></i> Audit Premium Insurance Workflow Automation (May 2021 – Present)</h3>
+                <p>Led a team of 8 engineers to design and deploy an advanced AI system for payroll document digitization, streamlining the worker's compensation audit process.</p>
+                <div class="project-details">
+                    <ul class="list-disc pl-5">
+                        <li>Conceptualized and implemented an end-to-end AI pipeline using advanced GenAI techniques and DevOps practices, deployed on AWS.</li>
+                        <li>Developed information retrieval models to extract data from diverse documents, reducing manual audit processes by 80% and operational costs by 40%.</li>
+                        <li>Created a streamlined audit workflow, boosting overall efficiency by 65% and driving $2M+ in annual revenue, with a projected YoY growth of 30-40%.</li>
+                        <li>Mentored junior engineers to achieve 95%+ accuracy in table digitization models, enhancing audit reliability.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="text-lg font-semibold"><i class="fas fa-building"></i> Castle High Value Property Insurance Surveys (Jan 2023 – Present)</h3>
+                <p>Spearheaded a self-predictive AI solution for underinsured property identification, a first-of-its-kind in the real estate insurance sector.</p>
+                <div class="project-details">
+                    <ul class="list-disc pl-5">
+                        <li>Managed end-to-end development using historical and geographical data, achieving $1M in revenue with a potential to exceed $2M annually.</li>
+                        <li>Collaborated with cross-functional teams to deploy the solution on AWS, improving decision-making accuracy by 20%.</li>
+                        <li>Guided a team of 6 engineers to ensure scalable deployment, maintaining 90%+ model performance.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="text-lg font-semibold"><i class="fas fa-chart-line"></i> Worker's Compensation Predictive Modeling (May 2021 – Present)</h3>
+                <p>Directed the development of a predictive model for NCCI worker's compensation class codes, enhancing insurance premium calculations.</p>
+                <div class="project-details">
+                    <ul class="list-disc pl-5">
+                        <li>Built a model with 90%+ accuracy in job role identification, reducing miscalculation risks by 15%.</li>
+                        <li>Implemented CI/CD pipelines and Dockerized deployment on AWS, ensuring seamless updates and scalability.</li>
+                        <li>Mentored team to optimize model performance, achieving a 10% improvement in inference speed.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="section">
-            <h2>Previous Professional Experience</h2>
-            <p><strong>R&D ML/AI Engineer, In-D AI, Pune, India</strong> (Jul 2020 – Apr 2021)</p>
-            <p>Developed deep learning models to denoise scanned documents and trained NLP and object detection systems for information extraction from loan and invoice documents, improving accuracy by up to 12%.</p>
-            <p><strong>Data Science Associate, Vidooly Media Tech, Noida, India</strong> (Mar 2019 – Feb 2020)</p>
-            <p>Built predictive and unsupervised models to analyze YouTube engagement and detect anomalies, enhancing tracking accuracy by 15%.</p>
-            <p><strong>Data Analyst/QA Engineer, Cybage Softwares, Pune, India</strong> (Jul 2016 – Jul 2018)</p>
-            <p>Conducted automation testing and report analysis for a global payment gateway, improving transactional accuracy.</p>
+        <div id="experience" class="section">
+            <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 mb-4">Previous Professional Experience</h2>
+            <p><strong>R&D ML/AI Engineer, In-D AI, Pune, India</strong> (Jul 2020 – Apr 2021)<br>
+            Developed deep learning models to denoise scanned documents and trained NLP and object detection systems for information extraction, improving accuracy by up to 12%.</p>
+            <p><strong>Data Science Associate, Vidooly Media Tech, Noida, India</strong> (Mar 2019 – Feb 2020)<br>
+            Built predictive and unsupervised models to analyze YouTube engagement and detect anomalies, enhancing tracking accuracy by 15%.</p>
+            <p><strong>Data Analyst/QA Engineer, Cybage Softwares, Pune, India</strong> (Jul 2016 – Jul 2018)<br>
+            Conducted automation testing and report analysis for a global payment gateway, improving transactional accuracy.</p>
         </div>
-        <div class="section">
-            <h2>Education</h2>
-            <p><strong>Master of Science in Machine Learning & AI</strong> (2019 – 2021)</p>
-            <p>Liverpool John Moores University, UK<br><em>Thesis: Information Extraction Using Graph Convolution Networks</em></p>
-            <p><strong>PG Diploma in Machine Learning and AI</strong> (2019 – 2020)</p>
-            <p>IIT Bombay, India</p>
-            <p><strong>B.E. in Computer Science</strong> (2012 – 2016)</p>
-            <p>Sathyabama University, India</p>
+        <div id="education" class="section">
+            <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 mb-4">Education</h2>
+            <p><strong>Master of Science in Machine Learning & AI</strong> (2019 – 2021)<br>
+            Liverpool John Moores University, UK<br><em>Thesis: Information Extraction Using Graph Convolution Networks</em></p>
+            <p><strong>PG Diploma in Machine Learning and AI</strong> (2019 – 2020)<br>IIT Bombay, India</p>
+            <p><strong>B.E. in Computer Science</strong> (2012 – 2016)<br>Sathyabama University, India</p>
         </div>
-        <div class="section">
-            <h2>Certifications</h2>
-            <ul>
+        <div id="certifications" class="section">
+            <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 mb-4">Certifications</h2>
+            <ul class="list-disc pl-5">
                 <li>Game Changer Team AI Award, EXL Service</li>
                 <li>Employee of the Quarter, EXL Service</li>
             </ul>
         </div>
-        <div class="section">
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div><strong>Languages</strong><br>Python<br>Java</div>
-                <div><strong>ML Frameworks</strong><br>TensorFlow<br>PyTorch<br>scikit-learn<br>Spark ML<br>Huggingface<br>NLTK<br>Keras<br>OpenCV</div>
-                <div><strong>Deep Learning</strong><br>CNN<br>RNN<br>LSTM<br>GAN<br>GCN</div>
-                <div><strong>AI Techniques</strong><br>Prompt Engineering<br>GenAI</div>
-                <div><strong>Databases</strong><br>SQL<br>Cassandra</div>
-                <div><strong>Cloud & MLOps</strong><br>Azure ML<br>Amazon ML<br>MLOps</div>
-                <div><strong>Operating Systems</strong><br>Windows<br>Linux</div>
+        <div id="skills" class="section">
+            <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 mb-4">Technical Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div>
+                    <strong>Languages</strong>
+                    <div class="skill-progress"><div></div></div>
+                    <p>Python, Java</p>
+                </div>
+                <div>
+                    <strong>ML Frameworks</strong>
+                    <div class="skill-progress"><div></div></div>
+                    <p>TensorFlow, PyTorch, scikit-learn, Spark ML, Huggingface, NLTK, Keras, OpenCV</p>
+                </div>
+                <div>
+                    <strong>Deep Learning</strong>
+                    <div class="skill-progress"><div></div></div>
+                    <p>CNN, RNN, LSTM, GAN, GCN</p>
+                </div>
+                <div>
+                    <strong>AI Techniques</strong>
+                    <div class="skill-progress"><div></div></div>
+                    <p>Prompt Engineering, GenAI</p>
+                </div>
+                <div>
+                    <strong>Databases</strong>
+                    <div class="skill-progress"><div></div></div>
+                    <p>SQL, Cassandra</p>
+                </div>
+                <div>
+                    <strong>Cloud & MLOps</strong>
+                    <div class="skill-progress"><div></div></div>
+                    <p>Azure ML, Amazon ML, MLOps</p>
+                </div>
+                <div>
+                    <strong>Operating Systems</strong>
+                    <div class="skill-progress"><div></div></div>
+                    <p>Windows, Linux</p>
+                </div>
             </div>
         </div>
-        <div class="section">
-            <h2>Languages</h2>
+        <div id="languages" class="section">
+            <h2 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 mb-4">Languages</h2>
             <p>English (Fluent), Hindi (Native), Japanese (N4)</p>
         </div>
     </div>
