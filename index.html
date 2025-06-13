@@ -1,0 +1,205 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chiranshu Bhatia - AI Engineer Manager Resume">
+    <meta name="keywords" content="AI Engineer, Machine Learning, GenAI, MLOps, Delhi, Resume">
+    <title>Chiranshu Bhatia - AI Engineer Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #0066CC;
+            color: #fff;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        .section {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #0066CC;
+            border-bottom: 2px solid #0066CC;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .skills-grid div {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0066CC;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background-color: #0055AA;
+        }
+        @media (max-width: 600px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Chiranshu Bhatia</h1>
+            <p>Machine Learning/AI Engineer Manager</p>
+            <p>+91 8446444869 | chirubhatia@live.com | Delhi, India</p>
+            <p>
+                <a href="https://github.com/chiranshubhatia" target="_blank" style="color: #fff;">GitHub</a> |
+                <a href="https://linkedin.com/in/chiranshubhatia" target="_blank" style="color: #fff;">LinkedIn</a> |
+                <a href="Chiranshu_Bhatia_Resume.pdf" download class="download-btn">Download Resume</a>
+            </p>
+        </div>
+        <div class="section">
+            <h2>Professional Story</h2>
+            <p>As a catalyst for innovation, I orchestrate teams to transform intricate data challenges into scalable AI solutions that drive millions in revenue and redefine operational efficiency. My leadership blends technical mastery with a vision for impact, guiding engineers to deliver systems with 95%+ accuracy while fostering collaboration across domains. By championing advanced AI and streamlined processes, I empower organizations to navigate dynamic tech landscapes with agility and precision, creating value that resonates with business goals and human aspirations.</p>
+        </div>
+        <div class="section">
+            <h2>Key Projects at EXL Service</h2>
+            <p><strong>Audit Premium Insurance Workflow Automation</strong> (May 2021 – Present)</p>
+            <p>Led a team of 8 engineers to design and deploy an advanced AI system for payroll document digitization, streamlining the worker's compensation audit process.</p>
+            <ul>
+                <li>Conceptualized and implemented an end-to-end AI pipeline using advanced GenAI techniques and DevOps practices, deployed on AWS.</li>
+                <li>Developed information retrieval models to extract data from diverse documents, reducing manual audit processes by 80% and operational costs by 40%.</li>
+                <li>Created a streamlined audit workflow, boosting overall efficiency by 65% and driving $2M+ in annual revenue, with a projected YoY growth of 30-40%.</li>
+                <li>Mentored junior engineers to achieve 95%+ accuracy in table digitization models, enhancing audit reliability.</li>
+            </ul>
+            <p><strong>Castle High Value Property Insurance Surveys</strong> (Jan 2023 – Present)</p>
+            <p>Spearheaded a self-predictive AI solution for underinsured property identification, a first-of-its-kind in the real estate insurance sector.</p>
+            <ul>
+                <li>Managed end-to-end development using historical and geographical data, achieving $1M in revenue with a potential to exceed $2M annually.</li>
+                <li>Collaborated with cross-functional teams to deploy the solution on AWS, improving decision-making accuracy by 20%.</li>
+                <li>Guided a team of 6 engineers to ensure scalable deployment, maintaining 90%+ model performance.</li>
+            </ul>
+            <p><strong>Worker's Compensation Predictive Modeling</strong> (May 2021 – Present)</p>
+            <p>Directed the development of a predictive model for NCCI worker's compensation class codes, enhancing insurance premium calculations.</p>
+            <ul>
+                <li>Built a model with 90%+ accuracy in job role identification, reducing miscalculation risks by 15%.</li>
+                <li>Implemented CI/CD pipelines and Dockerized deployment on AWS, ensuring seamless updates and scalability.</li>
+                <li>Mentored team to optimize model performance, achieving a 10% improvement in inference speed.</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Previous Professional Experience</h2>
+            <p><strong>R&D ML/AI Engineer, In-D AI, Pune, India</strong> (Jul 2020 – Apr 2021)</p>
+            <p>Developed deep learning models to denoise scanned documents and trained NLP and object detection systems for information extraction from loan and invoice documents, improving accuracy by up to 12%.</p>
+            <p><strong>Data Science Associate, Vidooly Media Tech, Noida, India</strong> (Mar 2019 – Feb 2020)</p>
+            <p>Built predictive and unsupervised models to analyze YouTube engagement and detect anomalies, enhancing tracking accuracy by 15%.</p>
+            <p><strong>Data Analyst/QA Engineer, Cybage Softwares, Pune, India</strong> (Jul 2016 – Jul 2018)</p>
+            <p>Conducted automation testing and report analysis for a global payment gateway, improving transactional accuracy.</p>
+        </div>
+        <div class="section">
+            <h2>Education</h2>
+            <p><strong>Master of Science in Machine Learning & AI</strong> (2019 – 2021)</p>
+            <p>Liverpool John Moores University, UK<br><em>Thesis: Information Extraction Using Graph Convolution Networks</em></p>
+            <p><strong>PG Diploma in Machine Learning and AI</strong> (2019 – 2020)</p>
+            <p>IIT Bombay, India</p>
+            <p><strong>B.E. in Computer Science</strong> (2012 – 2016)</p>
+            <p>Sathyabama University, India</p>
+        </div>
+        <div class="section">
+            <h2>Certifications</h2>
+            <ul>
+                <li>Game Changer Team AI Award, EXL Service</li>
+                <li>Employee of the Quarter, EXL Service</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div><strong>Languages</strong><br>Python<br>Java</div>
+                <div><strong>ML Frameworks</strong><br>TensorFlow<br>PyTorch<br>scikit-learn<br>Spark ML<br>Huggingface<br>NLTK<br>Keras<br>OpenCV</div>
+                <div><strong>Deep Learning</strong><br>CNN<br>RNN<br>LSTM<br>GAN<br>GCN</div>
+                <div><strong>AI Techniques</strong><br>Prompt Engineering<br>GenAI</div>
+                <div><strong>Databases</strong><br>SQL<br>Cassandra</div>
+                <div><strong>Cloud & MLOps</strong><br>Azure ML<br>Amazon ML<br>MLOps</div>
+                <div><strong>Operating Systems</strong><br>Windows<br>Linux</div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Languages</h2>
+            <p>English (Fluent), Hindi (Native), Japanese (N4)</p>
+        </div>
+    </div>
+</body>
+</html>
